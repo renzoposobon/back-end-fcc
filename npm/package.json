@@ -1,6 +1,10 @@
 {
 	"author": "renzo posobon",
+	"description": "the first project with node js",
 	"name": "fcc-learn-npm-package-json",
+	"keywords": [ "javascript", "backend", "freecodecamp" ],
+	"license": "MIT",
+	"version": "1.0.0",
 	"dependencies": {
 		"express": "^4.14.0"
 	},
