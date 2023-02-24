@@ -27,6 +27,10 @@ app.post('/api/shorturl', (req, res) => {
   const url = req.body.url
   const foundIndex = originalUrls.indexOf(url)
 
+  if(!url.includes("https://" && !url.includes("http://"))) {
+    return res.json({ error: 'invalid url' })
+  }
+
   if (foundIndex < 0) {
     originalUrls.push(url)
     shortUrls.push(shortUrls.length)
@@ -37,9 +41,7 @@ app.post('/api/shorturl', (req, res) => {
     })
   }
 
-  if(!url.includes("https://" && !url.includes("http://"))) {
-    return res.json({ 'error': 'invalid url' })
-  }
+
 
   return res.json({
     original_url: url,
