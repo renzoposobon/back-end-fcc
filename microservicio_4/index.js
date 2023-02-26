@@ -41,6 +41,10 @@ app.post("/api/users", (req, res) => {
     username: req.body.username
   })
   newUser.save((err, data) => {
+    // res.json({
+    //   "username": data.username,
+    //   "_id": data.id
+    // })
     if(err || !data){
       res.send("There was an error saving the user")
     }else{
@@ -49,6 +53,9 @@ app.post("/api/users", (req, res) => {
   })
 })
 
+/*
+La respuesta devuelta desde POST /api/users/:_id/exercises será el objeto de usuario con los campos de ejercicio añadidos.
+*/
 app.post("/api/users/:id/exercises", (req, res) => {
   const id = req.params.id
   const {description, duration, date} = req.body
@@ -80,6 +87,14 @@ app.post("/api/users/:id/exercises", (req, res) => {
   })
 })
 
+/*
+*Una solicitud al log del usuario GET /api/users/:_id/logs devuelve un objeto de usuario con una propiedad count representando el número de ejercicios que pertenecen a ese usuario.
+*Una solicitud GET a /api/users/:_id/logs devolverá el objeto de usuario con un arreglo log de todos los ejercicios añadidos.
+*Cada elemento en el arreglo log que es devuelto desde GET /api/users/:_id/logs es un objeto que debe tener las propiedades description, duration y date.
+*La propiedad description de cualquier objeto en el arreglo log que es devuelto desde GET /api/users/:_id/logs debe ser una cadena.
+*La propiedad duration de cualquier objeto en el arreglo log que es devuelto desde GET /api/users/:_id/logs debe ser un número.
+*La propiedad date de cualquier objeto en el arreglo log que es devuelto desde GET /api/users/:_id/logs debe ser una cadena. Utiliza el formato dateString de la API Date.
+*/
 app.get("/api/users/:id/logs", (req, res) => {
   const { from, to, limit } = req.query;
   const {id} = req.params;
